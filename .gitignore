@@ -1,0 +1,35 @@
+# ============================================================
+#  .gitignore — KURBAN DIGITAL
+# ============================================================
+
+# Dependencies
+node_modules/
+
+# Environment secrets (JANGAN PERNAH commit file ini!)
+.env
+.env.local
+.env.production
+.env*.local
+
+# Source kode asli yang DILINDUNGI
+# PENTING: Jangan commit folder ini ke repo publik!
+src/
+
+# File temporary & debug
+output.txt
+qr_base64.txt
+temp_test/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+.vercel

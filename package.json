@@ -1,0 +1,36 @@
+{
+  "name": "kurban-digital",
+  "version": "1.0.0",
+  "description": "Platform digitalisasi dan manajemen kurban kontemporer",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "node build.js",
+    "build:watch": "node build.js && echo 'Build selesai. Jalankan npm run dev untuk server lokal.'",
+    "docker:deploy": "powershell -ExecutionPolicy Bypass -File deploy.ps1",
+    "docker:stop": "powershell -ExecutionPolicy Bypass -File stop.ps1",
+    "docker:audit": "powershell -ExecutionPolicy Bypass -File security-audit.ps1",
+    "deploy:vercel": "vercel --prod"
+  },
+  "keywords": [
+    "kurban",
+    "digital",
+    "masjid",
+    "qurban",
+    "idul-adha"
+  ],
+  "author": "Risky Hariadi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "tiktok-live-connector": "^2.0.0"
+  },
+  "devDependencies": {
+    "javascript-obfuscator": "^4.1.1"
+  }
+}

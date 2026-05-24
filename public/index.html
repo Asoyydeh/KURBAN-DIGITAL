@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurban Digital // Modern Scan & Tracking Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- HLS.js for TikTok Live HLS streaming support -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Floating Navigation Bar -->
+    <header class="nav-container">
+        <nav class="nav-bar">
+            <a href="#" class="logo" onclick="switchPage('home')">
+                <!-- Crescent moon & dome SVG -->
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5zm-1.5-3.5c-.55 0-1-.45-1-1V8.5c0-.55.45-1 1-1s1 .45 1 1V13c0 .55-.45 1-1 1z"
+                        style="display:none;" />
+                    <path
+                        d="M19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.45 1.26-4.61 3.16-5.87C7.43 7.37 7 8.64 7 10c0 2.76 2.24 5 5 5 1.36 0 2.63-.43 3.87-1.16C14.61 15.74 12.45 17 10 17H8.5c2.45 2.1 5.64 3.1 9.5-.7-.7-.37-1.5-.56-2.5-.56-2.76 0-5 2.24-5 5 0 .54.1 1.05.28 1.53C6.39 16.27 3 11.53 3 6c0-.52.05-1.04.14-1.54C5.04 7.36 8.27 9 12 9c3.73 0 6.96-1.64 8.86-4.54.09.5.14 1.02.14 1.54 0 2.45-1.26 4.61-3.16 5.87.73-.24 1.4-.64 2.16-1.13v1.26z"
+                        style="display:none;" />
+                    <!-- Dome SVG icon -->
+                    <path
+                        d="M12 3C7.5 3 4 6.5 4 11v6h16v-6c0-4.5-3.5-8-8-8zm-1 12H7v-2h4v2zm0-4H7V9h4v2zm6 4h-4v-2h4v2zm0-4h-4V9h4v2z" />
+                </svg>
+                <span>KURBAN DIGITAL</span>
+            </a>
+
+            <ul class="nav-links">
+                <li class="nav-link active" id="nav-home"><a href="#" onclick="switchPage('home')">Home</a></li>
+                <li class="nav-link" id="nav-takbir"><a href="#" onclick="switchPage('takbir')">Takbir</a></li>
+                <li class="nav-link" id="nav-streaming"><a href="#" onclick="switchPage('streaming')">Streaming</a></li>
+                <li class="nav-link" id="nav-kurban"><a href="#" onclick="switchPage('kurban')">Hewan</a></li>
+                <li class="nav-link admin-only" id="nav-shohibul"><a href="#"
+                        onclick="switchPage('shohibul')">Shohibul</a></li>
+                <li class="nav-link admin-only" id="nav-pembayaran"><a href="#"
+                        onclick="switchPage('pembayaran')">Pembayaran</a></li>
+                <li class="nav-link admin-only" id="nav-distribusi"><a href="#"
+                        onclick="switchPage('distribusi')">Distribusi</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <button id="btn-login-admin" class="btn-primary" style="background: var(--color-gold); color: #000;"
+                    onclick="openLoginModal()">Login Admin</button>
+                <button id="btn-logout-admin" class="btn-primary" style="display: none; background: #ef4444;"
+                    onclick="handleLogout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN HOME PAGE (Dashboard & Hero) -->
+    <main id="page-home" class="page-container active" style="display: block; margin-top: 130px;">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-title-container">
+                <h1 class="hero-title">Kurban Digital</h1>
+            </div>
+            <div class="hero-desc-container">
+                <p class="hero-description">
+                    Platform digitalisasi kurban kontemporer. Lakukan monitoring realtime hewan kurban, streaming
+                    penyembelihan syar'i, donasi operasional, dan dapatkan E-Sertifikat instan.
+                </p>
+                <button class="btn-explore" onclick="openShohibulModal()">
+                    Mulai Berdonasi / Kurban
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Dashboard Contemporary Grid -->
+        <section class="dashboard-grid">
+            <!-- CARD 1: Countdown & Realtime Stats (Left Vertical) -->
+            <div class="card card-left-portrait">
+                <div class="card-header-icon">
+                    <span class="card-badge">LIVE TRACKER</span>
+                    <button class="card-action-btn" onclick="switchPage('kurban')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title" style="font-size: 1.8rem; margin-bottom: 12px;">Idul Adha 1447 H</h3>
+                    <p class="card-subtitle">Countdown Menuju Penyembelihan Kurban</p>
+
+                    <div class="countdown-box" id="countdown-timer">
+                        <div class="countdown-item">
+                            <div class="countdown-num" id="cd-days">0</div>
+                            <div class="countdown-label">Hari</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-num" id="cd-hours">00</div>
+                            <div class="countdown-label">Jam</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-num" id="cd-mins">00</div>
+                            <div class="countdown-label">Menit</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-num" id="cd-secs">00</div>
+                            <div class="countdown-label">Detik</div>
+                        </div>
+                    </div>
+
+                    <div class="stats-panel" style="margin-top: 24px;">
+                        <div class="stat-row">
+                            <span class="stat-label">Total Peserta Kurban</span>
+                            <span class="stat-val" id="stat-total-shohibul">0 Orang</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Hewan Terkumpul</span>
+                            <span class="stat-val" id="stat-total-hewan">0 Ekor</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Sudah Disembelih</span>
+                            <span class="stat-val" id="stat-sembelih-hewan">0 Ekor</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Pendanaan Operasional</span>
+                            <span class="stat-val" id="stat-dana-donasi">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 2: Takbir Sound System (Middle Landscape) -->
+            <div class="card card-middle-landscape">
+                <div class="card-header-icon">
+                    <span class="card-badge" style="color: #a78bfa;">AUDIO TAKBIR 🎵</span>
+                    <button class="card-action-btn" onclick="switchPage('takbir')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Gema Takbiran</h3>
+                    <p class="card-subtitle">Putar audio takbiran interaktif</p>
+
+                    <div class="audio-mini-player">
+                        <button class="audio-play-btn" id="mini-play-btn" onclick="toggleTakbirAudio()">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" id="play-icon-svg">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </button>
+                        <div class="audio-info-track">
+                            <div class="track-name" id="current-track-name">Takbir Merdu Masjid</div>
+                            <div class="track-status" id="current-track-status">Disetop</div>
+                        </div>
+                        <!-- Wave Animation -->
+                        <div class="wave-animation">
+                            <div class="wave-bar" id="wb-1"></div>
+                            <div class="wave-bar" id="wb-2"></div>
+                            <div class="wave-bar" id="wb-3"></div>
+                            <div class="wave-bar" id="wb-4"></div>
+                            <div class="wave-bar" id="wb-5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 3: E-Sertifikat & Smart QR (Right Square) -->
+            <div class="card card-right-square">
+                <div class="card-header-icon">
+                    <span class="card-badge" style="color: #fbbf24;">SERTIFIKAT & QR</span>
+                    <button class="card-action-btn" onclick="openCertificateModal()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Smart QR & E-Sertifikat</h3>
+                    <p class="card-subtitle" style="margin-bottom: 12px;">Cetak sertifikat kurban Anda secara instan.
+                    </p>
+                    <div class="form-group" style="flex-direction: row; gap: 8px;">
+                        <input type="text" id="shohibul-search-cert" class="form-input" placeholder="Nama shohibul..."
+                            style="padding: 8px 12px; font-size: 0.8rem; flex: 1;">
+                        <button class="btn-primary" onclick="generateSearchedCert()"
+                            style="padding: 8px 16px; font-size: 0.8rem; border-radius: 10px;">Cek</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 4: Distribution Live Tracking (Bottom Landscape) -->
+            <div class="card card-bottom-landscape">
+                <div class="card-header-icon">
+                    <span class="card-badge" style="color: #10b981;">ZONASI DISTRIBUSI</span>
+                    <button class="card-action-btn" onclick="switchPage('distribusi')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="card-content"
+                    style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
+                    <div>
+                        <h3 class="card-title">Pemantauan Kurir Daging</h3>
+                        <p class="card-subtitle">Relawan sedang melakukan distribusi ke area penerima</p>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.05); padding: 8px 14px; border-radius: 12px; font-size: 0.8rem;">
+                        <span style="color: var(--color-primary); font-weight: 700;" id="active-couriers-count">3
+                            Relawan</span> Aktif
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 5: Developer Profile & Donation (Right Portrait) -->
+            <div class="card card-right-portrait">
+                <div class="card-header-icon">
+                    <span class="card-badge" style="color: var(--color-gold);">DEVELOPER CREDIT</span>
+                    <button class="card-action-btn" onclick="openDonationModal()" title="Dukung Developer">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="card-content" style="display: flex; flex-direction: column; justify-content: space-between; height: calc(100% - 60px);">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                            <div style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-gold)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);">
+                                RH
+                            </div>
+                            <div>
+                                <h4 style="font-size: 1rem; font-weight: 700; color: #000; margin: 0;">Risky Hariadi</h4>
+                                <p style="font-size: 0.72rem; color: var(--color-text-muted); margin: 0;">Creator & Developer</p>
+                            </div>
+                        </div>
+                        <p class="card-subtitle" style="line-height: 1.5; font-size: 0.8rem; margin-bottom: 16px; text-align: justify;">
+                            Platform Kurban Digital dirancang untuk mempermudah monitoring hewan, streaming penyembelihan syar'i, donasi operasional, cetak e-sertifikat, dan penyerahan daging secara transparan.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(16, 185, 129, 0.04); border: 1px solid var(--glass-border); padding: 12px; border-radius: 12px; margin-top: auto; margin-bottom: 16px;">
+                        <span style="font-size: 0.68rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 4px;">Dukungan Donasi</span>
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                            <div>
+                                <span style="font-size: 0.75rem; font-weight: 700; color: #000; display: block;">Gopay</span>
+                                <span style="font-size: 0.82rem; font-weight: 800; color: var(--color-primary); letter-spacing: 0.02em;" id="gopay-num-display">0877-9188-1535</span>
+                            </div>
+                            <button class="btn-primary" onclick="copyGopayNumber()" style="padding: 6px 12px; font-size: 0.75rem; border-radius: 8px; font-weight: 700;">Copy</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" onclick="openDonationModal()" style="width: 100%; padding: 10px; font-size: 0.8rem; font-weight: 700; border-radius: 8px; justify-content: center; background: #00AED6; border: none; color: #fff;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 6px;">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <line x1="12" y1="10" x2="12" y2="10"></line>
+                            <line x1="2" y1="10" x2="22" y2="10"></line>
+                        </svg>
+                        Donasi via Gopay
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- SUBPAGE: TA K B I R -->
+    <section id="page-takbir" class="page-container">
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">Gema <span>Takbiran</span></h2>
+                <p class="page-subtitle">Audio islami syahdu untuk menemani ibadah Idul Adha Anda.</p>
+            </div>
+            <div
+                style="background: rgba(255,255,255,0.02); padding: 8px 16px; border-radius: 20px; border: 1px solid var(--glass-border); font-size: 0.8rem;">
+                Streaming Radio Takbir: <span style="color: var(--color-primary); font-weight: 600;"
+                    id="radio-status">OFFLINE</span>
+            </div>
+        </div>
+
+        <!-- Visualizer Card removed per user request -->
+
+        <!-- Right side: Video Player Screen -->
+        <div style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+            <h4
+                style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-primary);"
+                    id="player-dot"></span>
+                Media Player Screen
+            </h4>
+
+            <!-- Local Audio Player -->
+            <div id="local-audio-wrapper"
+                style="border-radius: 20px; border: 1px solid var(--glass-border); background: rgba(16,185,129,0.04); width: 100%; padding: 28px 24px; box-shadow: 0 12px 30px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 16px;">
+                <!-- Album Art / Visualizer -->
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div id="audio-art"
+                        style="width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #059669); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 20px rgba(16,185,129,0.4); transition: transform 1s linear;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+                        </svg>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <div id="local-track-title"
+                            style="color: #fff; font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            Takbiran Idul Adha 2026 Terbaru</div>
+                        <div id="local-track-sub" style="color: var(--color-text-muted); font-size: 0.78rem;">NonStop
+                            Gema Takbir Idul Adha 1447H 🎵</div>
+                    </div>
+                </div>
+                <!-- Progress Bar -->
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <input type="range" id="local-audio-seek" min="0" max="100" value="0"
+                        style="width: 100%; accent-color: var(--color-primary); cursor: pointer; height: 4px;"
+                        oninput="seekLocalAudio(this.value)">
+                    <div
+                        style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--color-text-muted);">
+                        <span id="local-time-current">0:00</span>
+                        <span id="local-time-total">--:--</span>
+                    </div>
+                </div>
+                <!-- Native audio element (hidden, controlled by JS) -->
+                <audio id="local-audio-el" preload="metadata" loop>
+                    <source src="lagu/takbiran-idul-adha-2026.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <!-- Placeholder when synth is selected -->
+            <div id="synth-player-placeholder"
+                style="border-radius: 20px; border: 1px dashed var(--glass-border); background: rgba(255,255,255,0.01); width: 100%; padding: 40px 24px; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)"
+                    stroke-width="1.5" style="margin-bottom: 12px; opacity: 0.7;">
+                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+                </svg>
+                <h5 style="color: #fff; font-size: 0.9rem; margin-bottom: 4px;">Pemutar Sintetis Aktif</h5>
+                <p style="color: var(--color-text-muted); font-size: 0.75rem;">Menggunakan synthesizer gelombang audio
+                    bawaan. Pilih track "Takbiran Lokal" di atas untuk memutar file MP3 asli.</p>
+            </div>
+        </div>
+        </div>
+
+        <div class="form-grid" style="grid-template-columns: 1fr; margin-bottom: 40px;">
+            <!-- Audio Settings Card -->
+            <div class="form-card">
+                <h4 style="font-size: 1.2rem; margin-bottom: 20px;">Pengaturan Audio</h4>
+
+                <!-- Hidden Playlist Container to prevent JS Error -->
+                <div id="playlist-container" style="display: none;"></div>
+
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="form-group">
+                        <label class="form-label">Volume</label>
+                        <input type="range" id="audio-volume" min="0" max="100" value="80"
+                            style="accent-color: var(--color-primary); cursor: pointer;"
+                            oninput="adjustVolume(this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Timer Berhenti Otomatis (Sleep Timer)</label>
+                        <select id="sleep-timer-select" class="form-select" onchange="setupSleepTimer(this.value)">
+                            <option value="0">Matikan Timer</option>
+                            <option value="1">1 Menit (Untuk Demo)</option>
+                            <option value="15">15 Menit</option>
+                            <option value="30">30 Menit</option>
+                            <option value="60">60 Menit</option>
+                        </select>
+                        <span id="timer-countdown"
+                            style="font-size: 0.75rem; color: var(--color-gold); font-weight: 600;"></span>
+                    </div>
+                    <div class="form-group"
+                        style="flex-direction: row; justify-content: space-between; align-items: center;">
+                        <div>
+                            <label class="form-label" style="margin-bottom: 0;">Auto-play saat Buka Aplikasi</label>
+                            <p style="font-size: 0.7rem; color: var(--color-text-muted);">Mainkan audio takbir otomatis
+                                saat dimuat.</p>
+                        </div>
+                        <input type="checkbox" id="autoplay-toggle"
+                            style="width: 20px; height: 20px; accent-color: var(--color-primary); cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUBPAGE: LIVE STREAMING MULTI-PLATFORM -->
+    <section id="page-streaming" class="page-container">
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">Live <span>Streaming</span></h2>
+                <p class="page-subtitle">Saksikan siaran langsung prosesi penyembelihan kurban syar'i.</p>
+            </div>
+            <div id="streaming-status-pill" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: #ef4444; animation: livePulse 1.0s infinite alternate;"></span>
+                Siaran Langsung: <span style="font-weight: 700; color: #ef4444;" id="streaming-status-text">OFFLINE</span>
+            </div>
+        </div>
+
+        <!-- Platform Selectors -->
+        <div class="platform-tabs" style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
+            <button class="btn-platform active" onclick="selectStreamPlatform('youtube')" id="btn-stream-youtube">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                YouTube
+            </button>
+            <button class="btn-platform" onclick="selectStreamPlatform('tiktok')" id="btn-stream-tiktok">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.09-1.51-.13-.1-.26-.21-.38-.32v5.71c.02 2.23-.63 4.54-2.24 6.12-1.89 1.93-4.91 2.45-7.39 1.48-2.88-1.07-4.88-4.14-4.57-7.27.24-3.21 2.92-5.88 6.13-6.14.73-.06 1.47.03 2.19.26V12c-.3-.11-.62-.16-.94-.17-1.86-.11-3.6 1.18-4.06 2.97-.58 2.07.72 4.39 2.79 4.88 1.91.49 4.11-.5 4.79-2.31.2-.49.27-1.01.26-1.53v-15.8c-.01-.01-.02-.02-.03-.02z"/></svg>
+                TikTok Live
+            </button>
+            <button class="btn-platform" onclick="selectStreamPlatform('facebook')" id="btn-stream-facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Facebook Live
+            </button>
+            <button class="btn-platform" onclick="selectStreamPlatform('discord')" id="btn-stream-discord">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z"/></svg>
+                Discord
+            </button>
+        </div>
+
+        <!-- Platform Specific Player Views -->
+        <div class="stream-players-container">
+            <!-- YouTube Panel -->
+            <div id="panel-stream-youtube" class="stream-panel active">
+                <div class="stream-layout-grid">
+                    <!-- Player Area -->
+                    <div class="stream-video-wrap">
+                        <iframe id="youtube-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <!-- Live Chat Area -->
+                    <div class="stream-chat-wrap">
+                        <div class="stream-chat-header">
+                            <span>Live Chat (YouTube)</span>
+                            <span class="live-chat-dot">● LIVE</span>
+                        </div>
+                        <div id="youtube-chat-messages" class="stream-chat-body">
+                            <!-- Simulator inserts chat comments here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TikTok Panel -->
+            <div id="panel-stream-tiktok" class="stream-panel">
+                <div class="tiktok-outer-wrap">
+                    <!-- Phone Frame Mockup -->
+                    <div class="tiktok-phone">
+                        <!-- Background Simulator Loop -->
+                        <canvas id="tiktok-canvas"></canvas>
+
+                        <!-- Top Bar Info -->
+                        <div class="tiktok-header">
+                            <div class="tiktok-profile">
+                                <div class="tiktok-avatar">KD</div>
+                                <div>
+                                    <span class="tiktok-name">Kurban Digital</span>
+                                    <span class="tiktok-username" id="tiktok-username-display">@kurbandigital</span>
+                                </div>
+                            </div>
+                            <div class="tiktok-badge">
+                                <span>● LIVE</span>
+                                <span id="tiktok-viewer-count">241</span>
+                            </div>
+                        </div>
+
+                        <!-- Floating Hearts Container -->
+                        <div id="tiktok-hearts-container" class="tiktok-hearts-area"></div>
+
+                        <!-- Overlay Warning TikTok Embed -->
+                        <div id="tiktok-live-overlay" class="tiktok-live-overlay-container">
+                            <div class="tiktok-overlay-card">
+                                <div class="tiktok-overlay-icon">🔒</div>
+                                <h4 class="tiktok-overlay-title">Keamanan TikTok Live</h4>
+                                <p class="tiktok-overlay-desc">Kebijakan privasi TikTok melarang penayangan Live secara langsung di dalam frame website lain.</p>
+                                <a id="tiktok-btn-watch-live" href="#" target="_blank" class="tiktok-overlay-btn">Buka Live di TikTok ↗</a>
+                            </div>
+                        </div>
+
+                        <!-- Bottom HUD Content -->
+                        <div class="tiktok-hud">
+                            <!-- Scrolling Chat Comments -->
+                            <div id="tiktok-chat-messages" class="tiktok-comments">
+                                <!-- Auto comments -->
+                            </div>
+
+                            <!-- Action row -->
+                            <div class="tiktok-actions">
+                                <input type="text" placeholder="Kirim komentar..." class="tiktok-input" readonly>
+                                <button onclick="sendTikTokHeart()" class="tiktok-heart-btn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3c3.08 0 5.5 2.42 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Facebook Panel -->
+            <div id="panel-stream-facebook" class="stream-panel">
+                <div class="stream-layout-grid">
+                    <!-- Player Area -->
+                    <div class="fb-player-wrap">
+                        <!-- Floating reactions container -->
+                        <div id="fb-reactions-container" class="fb-reactions-area"></div>
+
+                        <!-- Top Facebook HUD -->
+                        <div class="fb-header">
+                            <div class="fb-profile">
+                                <span class="fb-live-tag">LIVE</span>
+                                <span class="fb-stream-title">Facebook Live Stream Kurban</span>
+                            </div>
+                            <span class="fb-viewer-badge" id="fb-viewer-count">👁 1.2K Penonton</span>
+                        </div>
+
+                        <!-- Actual Facebook Live Embed Player -->
+                        <iframe id="facebook-iframe" src="" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; z-index: 2;" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+
+                        <!-- Canvas simulator for background -->
+                        <canvas id="fb-canvas"></canvas>
+
+                        <!-- Bottom Facebook reactions HUD -->
+                        <div class="fb-footer">
+                            <span class="fb-action-label">Berikan Reaksi Anda:</span>
+                            <div class="fb-reactions-bar">
+                                <button class="btn-fb-reaction" onclick="triggerFacebookReaction('like')">👍</button>
+                                <button class="btn-fb-reaction" onclick="triggerFacebookReaction('love')">❤️</button>
+                                <button class="btn-fb-reaction" onclick="triggerFacebookReaction('care')">🥰</button>
+                                <button class="btn-fb-reaction" onclick="triggerFacebookReaction('haha')">😆</button>
+                                <button class="btn-fb-reaction" onclick="triggerFacebookReaction('wow')">😮</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Live Chat Area -->
+                    <div class="stream-chat-wrap">
+                        <div class="stream-chat-header">
+                            <span>Live Feed (Facebook)</span>
+                        </div>
+                        <div id="facebook-chat-messages" class="stream-chat-body">
+                            <!-- Auto chat -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discord Panel -->
+            <div id="panel-stream-discord" class="stream-panel">
+                <div class="discord-layout">
+                    <!-- Discord Sidebar -->
+                    <div class="discord-sidebar">
+                        <div class="discord-sidebar-section">
+                            <span class="discord-section-title">Voice Channels</span>
+                            <div class="discord-channels-list">
+                                <div class="discord-channel-item active">
+                                    <span class="discord-channel-name">
+                                        <span class="discord-channel-icon">🔊</span> Live Sembelih
+                                    </span>
+                                    <span class="discord-connected-badge">Connected</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- User list in voice room -->
+                        <div class="discord-sidebar-section flex-grow">
+                            <span class="discord-section-title">Peserta Voice</span>
+                            <div class="discord-voice-users" id="discord-voice-users">
+                                <!-- Generated by JS with speaking indicator rings -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Screen Share Center Area -->
+                    <div class="discord-main">
+                        <div class="discord-header">
+                            <div class="discord-stream-info">
+                                <span class="discord-stream-icon">💻</span>
+                                <div>
+                                    <span class="discord-stream-title">Live Screen Share</span>
+                                    <span class="discord-stream-subtitle">Risky Hariadi is screen sharing the stable camera</span>
+                                </div>
+                            </div>
+                            <span class="discord-quality-badge">HD 1080P</span>
+                        </div>
+
+                        <!-- Live Feed Simulator Canvas -->
+                        <div class="discord-viewport">
+                            <canvas id="discord-canvas"></canvas>
+                            
+                            <!-- Speaking Overlay Graphic -->
+                            <div class="discord-speaking-overlay">
+                                <span class="discord-speaking-dot"></span>
+                                <span id="discord-speaking-text">Ustadz Hanafi sedang membaca doa...</span>
+                            </div>
+                        </div>
+
+                        <!-- Discord Footer Actions -->
+                        <div class="discord-footer">
+                            <div class="discord-user-info">
+                                <div class="discord-user-avatar">RH</div>
+                                <div>
+                                    <span class="discord-user-name">Risky Hariadi</span>
+                                    <span class="discord-user-role">Developer</span>
+                                </div>
+                            </div>
+                            <div class="discord-controls">
+                                <a id="discord-btn-join" href="#" target="_blank" class="discord-btn" style="background: #5865f2; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 4px;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 2px;"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z"/></svg>
+                                    Join Server
+                                </a>
+                                <button class="discord-btn">Mute</button>
+                                <button class="discord-btn">Deafen</button>
+                                <button class="discord-btn disconnect" onclick="switchPage('home')">Disconnect</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Control Settings inside page-streaming, only visible to admin -->
+        <div class="form-card admin-only" id="streaming-admin-card" style="margin-top: 24px; display: none;">
+            <h4 style="font-size: 1.2rem; margin-bottom: 20px; color: var(--color-text);">Pengaturan Live Streaming (Admin)</h4>
+            <form id="form-stream-config" onsubmit="handleStreamConfigSubmit(event)">
+                <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label class="form-label">YouTube Stream Link / ID</label>
+                        <input type="text" id="cfg-youtube-id" class="form-input" placeholder="Contoh: dQw4w9WgXcQ atau Link Penuh">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">TikTok Username</label>
+                        <input type="text" id="cfg-tiktok-user" class="form-input" placeholder="Contoh: kurbandigital">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Facebook Live Stream URL (Simulasi)</label>
+                        <input type="text" id="cfg-facebook-url" class="form-input" placeholder="Contoh: Link video facebook live">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Discord Server Invite / Link</label>
+                        <input type="text" id="cfg-discord-invite" class="form-input" placeholder="Contoh: https://discord.gg/invitecode">
+                    </div>
+                </div>
+                <div style="margin-top: 16px; display: flex; gap: 8px;">
+                    <button type="submit" class="btn-primary">Simpan Konfigurasi</button>
+                    <button type="button" class="btn-primary" onclick="resetStreamConfig()" style="background: #eab308; color: #000;">Reset Default</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- SUBPAGE: HEWAN KURBAN (Inventory Management) -->
+    <section id="page-kurban" class="page-container">
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">Pencatatan <span>Hewan Kurban</span></h2>
+                <p class="page-subtitle">Daftar inventori hewan kurban yang terdaftar.</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn-primary admin-only" onclick="resetToDefaultData()"
+                    style="display: none; background: #eab308; color: #000; font-weight: 700; border-radius: 8px; border: none; padding: 10px 18px; transition: transform 0.2s; cursor: pointer;"
+                    onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                    Reset Data Bawaan
+                </button>
+                <!-- Visible only for Super Admin and Panitia -->
+                <button class="btn-primary" id="btn-add-hewan" onclick="openAddAnimalModal()" style="display: none;">
+                    + Tambah Hewan
+                </button>
+            </div>
+        </div>
+
+        <div class="form-card" style="margin-bottom: 40px;">
+            <div class="table-container">
+                <table class="custom-table" id="table-animals">
+                    <thead>
+                        <tr>
+                            <th>Nomor Hewan</th>
+                            <th>Jenis</th>
+                            <th>Bobot (Kg)</th>
+                            <th>Umur (Tahun)</th>
+                            <th>Kondisi Kesehatan</th>
+                            <th>Status Proses</th>
+                            <th>Aksi Admin</th>
+                        </tr>
+                    </thead>
+                    <tbody id="animal-list-body">
+                        <!-- Rendered by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUBPAGE: SHOHIBUL QURBAN -->
+    <section id="page-shohibul" class="page-container">
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">Shohibul <span>Qurban</span></h2>
+                <p class="page-subtitle">Data peserta yang mendaftarkan kurban di masjid.</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn-primary admin-only" onclick="resetToDefaultData()"
+                    style="display: none; background: #eab308; color: #000; font-weight: 700; border-radius: 8px; border: none; padding: 10px 18px; transition: transform 0.2s; cursor: pointer;"
+                    onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                    Reset Data Bawaan
+                </button>
+                <button class="btn-primary" onclick="openShohibulModal()">+ Daftar Kurban</button>
+            </div>
+        </div>
+
+        <div class="form-card" style="margin-bottom: 40px;">
+            <div class="table-container">
+                <table class="custom-table" id="table-shohibul">
+                    <thead>
+                        <tr>
+                            <th>Nama Shohibul</th>
+                            <th>Nomor HP</th>
+                            <th>Paket Kurban</th>
+                            <th>Jenis Kurban</th>
+                            <th>Patungan Sapi</th>
+                            <th>Status Pembayaran</th>
+                            <th>Cetak E-Sertifikat</th>
+                            <th id="th-hubungi">Hubungi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="shohibul-list-body">
+                        <!-- Rendered by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUBPAGE: PEMBAYARAN -->
+    <section id="page-pembayaran" class="page-container">
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">Pembayaran <span>Konfirmasi</span></h2>
+                <p class="page-subtitle">Daftar transaksi dan rekap kas pembayaran kurban.</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn-primary admin-only" onclick="resetToDefaultData()"
+                    style="display: none; background: #eab308; color: #000; font-weight: 700; border-radius: 8px; border: none; padding: 10px 18px; transition: transform 0.2s; cursor: pointer;"
+                    onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                    Reset Data Bawaan
+                </button>
+            </div>
+        </div>
+
+        <div class="form-grid" style="grid-template-columns: 1.2fr 0.8fr; margin-bottom: 40px;">
+            <!-- Transactions List -->
+            <div class="form-card">
+                <h4 style="font-size: 1.2rem; margin-bottom: 20px;">Daftar Transaksi</h4>
+                <div class="table-container">
+                    <table class="custom-table" id="table-payments">
+                        <thead>
+                            <tr>
+                                <th>Pengirim</th>
+                                <th>Nominal</th>
+                                <th>Metode</th>
+                                <th>Status</th>
+                                <th>Verifikasi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payment-list-body">
+                            <!-- Rendered by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Kas Summary (Visible to Bendahara/Admin) -->
+            <div class="form-card">
+                <h4 style="font-size: 1.2rem; margin-bottom: 20px;">Ringkasan Pemasukan</h4>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div
+                        style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 16px; border: 1px solid var(--glass-border);">
+                        <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-text-muted);">
+                            Total Kas Kurban</div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--color-primary); margin-top: 4px;"
+                            id="total-kas-pemasukan">Rp 0</div>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 16px; border: 1px solid var(--glass-border);">
+                        <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-text-muted);">
+                            Belum Lunas / Tunggakan</div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: #f87171; margin-top: 4px;"
+                            id="total-tunggakan">Rp 0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUBPAGE: DISTRIBUSI DAGING -->
+    <section id="page-distribusi" class="page-container">
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">Distribusi <span>Daging Kurban</span></h2>
+                <p class="page-subtitle">Pelacakan pengiriman daging kurban kepada warga penerima.</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn-primary admin-only" onclick="resetToDefaultData()"
+                    style="display: none; background: #eab308; color: #000; font-weight: 700; border-radius: 8px; border: none; padding: 10px 18px; transition: transform 0.2s; cursor: pointer;"
+                    onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                    Reset Data Bawaan
+                </button>
+                <button class="btn-primary" id="btn-add-recipient" onclick="openAddRecipientModal()">
+                    + Daftar Penerima Daging
+                </button>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 40px;">
+            <!-- Recipient Database & Tracking -->
+            <div class="form-card">
+                <h4 style="font-size: 1.2rem; margin-bottom: 12px;">Daftar Penerima Daging</h4>
+                <p class="card-subtitle" style="margin-bottom: 20px;">Lakukan pembaruan status penerimaan daging kurban
+                    pada tabel di bawah.</p>
+
+                <div class="table-container">
+                    <table class="custom-table" id="table-recipients">
+                        <thead>
+                            <tr>
+                                <th>Kode Unik</th>
+                                <th>Nama Penerima</th>
+                                <th>Pilihan Daging</th>
+                                <th>Jml Keluarga</th>
+                                <th>Blok & Perumahan</th>
+                                <th>Warna Cat Rumah</th>
+                                <th>No. WhatsApp</th>
+                                <th>Status Pengantaran</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recipient-list-body">
+                            <!-- Rendered by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUBPAGE: ADMIN PANEL -->
+    <section id="page-admin" class="page-container">
+        <div class="page-header">
+            <div>
+                <h2 class="page-title">Admin <span>Panel</span></h2>
+                <p class="page-subtitle">Pusat kendali dan dashboard panitia Kurban Digital.</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn-primary admin-only" onclick="resetToDefaultData()"
+                    style="display: none; background: #eab308; color: #000; font-weight: 700; border-radius: 8px; border: none; padding: 10px 18px; transition: transform 0.2s; cursor: pointer;"
+                    onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                    Reset Data Bawaan
+                </button>
+            </div>
+        </div>
+
+        <!-- System Settings -->
+        <div class="form-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 40px;">
+            <div class="form-card">
+                <h4 style="font-size: 1.2rem; margin-bottom: 20px;">Penyembelihan & Live Monitoring</h4>
+                <p class="card-subtitle" style="margin-bottom: 20px;">Simulasi broadcast video streaming sembelih.</p>
+
+                <div class="live-stream-box">
+                    <div class="live-badge"><span></span> LIVE STREAM</div>
+                    <!-- Live canvas simulation drawing -->
+                    <canvas id="live-stream-canvas" style="width: 100%; height: 100%; object-fit: cover;"></canvas>
+                </div>
+                <div style="margin-top: 16px; display: flex; gap: 8px;">
+                    <button class="btn-primary" onclick="toggleSlaughterLive()" id="live-slaughter-btn">Start
+                        Stream</button>
+                    <button class="btn-primary" onclick="triggerNextSlaughterState()"
+                        style="background: var(--color-gold); color: #000; box-shadow: 0 4px 15px var(--color-gold-glow);">Sembelih
+                        Hewan Berikutnya</button>
+                </div>
+            </div>
+
+            <div class="form-card">
+                <h4 style="font-size: 1.2rem; margin-bottom: 20px;">Edukasi Ritual Kurban & Broadcast</h4>
+                <p class="card-subtitle" style="margin-bottom: 20px;">Niat kurban, doa penyembelihan dan fiqih kurban.
+                </p>
+
+                <div
+                    style="display: flex; flex-direction: column; gap: 12px; max-height: 250px; overflow-y: auto; padding-right: 8px;">
+                    <div
+                        style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 12px; border: 1px solid var(--glass-border);">
+                        <h5 style="color: var(--color-gold); font-size: 0.9rem; margin-bottom: 6px;">Niat Kurban
+                            (Shohibul)</h5>
+                        <p style="font-size: 0.8rem; line-height: 1.4; color: var(--color-text-muted);">"Nawaitu an
+                            udhahiya 'an nafsi lillahi ta'ala." (Saya berniat berkurban untuk diri saya sendiri karena
+                            Allah Ta'ala).</p>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 12px; border: 1px solid var(--glass-border);">
+                        <h5 style="color: var(--color-gold); font-size: 0.9rem; margin-bottom: 6px;">Doa Menyembelih
+                            Hewan</h5>
+                        <p style="font-size: 0.8rem; line-height: 1.4; color: var(--color-text-muted);">"Bismillahi
+                            wallahu akbar, allahumma hadza minka wa ilaika..." (Dengan nama Allah, Allah Maha Besar, Ya
+                            Allah kurban ini dari-Mu dan untuk-Mu...).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL 1: REGISTRASI SHOHIBUL QURBAN -->
+    <div class="modal-overlay" id="modal-shohibul">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeShohibulModal()">&times;</button>
+            <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--color-text);">Registrasi Shohibul Qurban
+            </h3>
+            <p class="card-subtitle" style="margin-bottom: 24px;">Silakan isi formulir di bawah ini untuk pendaftaran
+                kurban online.</p>
+
+            <form id="form-shohibul-reg" onsubmit="handleShohibulReg(event)">
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div class="form-group">
+                        <label class="form-label">Nama Lengkap Peserta</label>
+                        <input type="text" id="reg-name" class="form-input" placeholder="Masukkan nama..." required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nomor WhatsApp</label>
+                        <input type="tel" id="reg-phone" class="form-input" placeholder="Contoh: 081234567890" required>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Jenis Hewan</label>
+                            <select id="reg-type" class="form-select" onchange="adjustPriceEstimate(this.value)">
+                                <option value="Kambing Standard">Kambing Standard (Rp 2.8Jt)</option>
+                                <option value="Kambing Premium">Kambing Premium (Rp 3.5Jt)</option>
+                                <option value="Sapi Patungan">Patungan Sapi 1/7 (Rp 3.6Jt)</option>
+                                <option value="Sapi Utuh">Sapi Utuh (Rp 25Jt)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Metode Pembayaran</label>
+                            <select id="reg-pay-method" class="form-select">
+                                <option value="QRIS">QRIS (Konfirmasi Instan)</option>
+                                <option value="Transfer Bank">Transfer Bank</option>
+                                <option value="E-Wallet">E-Wallet (OVO/Dana)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div
+                        style="background: rgba(16, 185, 129, 0.05); padding: 16px; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.15); display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 0.85rem; color: var(--color-text-muted);">Estimasi Nominal Kurban</span>
+                        <span style="font-size: 1.2rem; font-weight: 800; color: var(--color-primary);"
+                            id="reg-price-estimation">Rp 2.800.000</span>
+                    </div>
+                    <button type="submit" class="btn-primary"
+                        style="justify-content: center; width: 100%; padding: 16px;">Lanjut Pembayaran</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: QRIS CHECKOUT GATEWAY -->
+    <div class="modal-overlay" id="modal-qris">
+        <div class="modal-content" style="max-width: 440px; text-align: center;">
+            <button class="modal-close" onclick="closeQrisModal()">&times;</button>
+            <h3 style="font-size: 1.4rem; color: #000; margin-bottom: 6px;">Pembayaran QRIS</h3>
+            <p class="card-subtitle" style="margin-bottom: 20px;">Silakan scan QRIS di bawah ini untuk menyelesaikan
+                pembayaran kurban.</p>
+
+            <div
+                style="background: #ffffff; padding: 20px; border-radius: 20px; display: inline-block; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 20px; border: 1px solid var(--glass-border);">
+                <!-- Uploaded QRIS Code pointing to Google Drive -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https%3A%2F%2Fdrive.google.com%2Fdrive%2Ffolders%2F1u9HDi8oZxJffb_vfwMl_wqNl4vCGQ2vi"
+                    alt="QRIS Kurban"
+                    style="width: 100%; max-width: 220px; border-radius: 8px; display: block; margin: 0 auto;">
+            </div>
+
+            <div
+                style="text-align: left; background: #fafafa; padding: 16px; border-radius: 12px; border: 1px solid var(--glass-border); margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="font-size: 0.8rem; color: var(--color-text-muted);">Nama Shohibul</span>
+                    <span style="font-size: 0.8rem; font-weight: 600; color: #000;" id="qris-name">Ikky</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-size: 0.8rem; color: var(--color-text-muted);">Nominal Transfer</span>
+                    <span style="font-size: 0.9rem; font-weight: 800; color: #000;" id="qris-amount">Rp 2.800.000</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+                <button class="btn-primary" onclick="simulatePaymentConfirm(true)"
+                    style="flex: 1; justify-content: center;">Konfirmasi Pembayaran</button>
+                <button class="btn-primary" onclick="simulatePaymentConfirm(false)"
+                    style="flex: 1; justify-content: center; background: #fff; border: 1px solid #eaeaea; color: #ef4444; box-shadow: none;">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: E-SERTIFIKAT VIEWER -->
+    <div class="modal-overlay" id="modal-certificate">
+        <div class="modal-content" style="max-width: 760px;">
+            <button class="modal-close" onclick="closeCertificateModal()">&times;</button>
+            <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--color-text);">E-Sertifikat Kurban Digital
+            </h3>
+            <p class="card-subtitle" style="margin-bottom: 20px;">Cetak atau unduh sertifikat bukti pelaksanaan ibadah
+                kurban Anda.</p>
+
+            <div
+                style="background: #ffffff; padding: 12px; border-radius: 16px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.6);">
+                <canvas id="cert-canvas"
+                    style="width: 100%; height: auto; display: block; border-radius: 12px;"></canvas>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.8rem; color: var(--color-text-muted);">*Anda dapat mengunduh berkas ini
+                    sebagai bukti kurban resmi.</span>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-primary" onclick="downloadCertificate()">Unduh Sertifikat (JPG)</button>
+                    <button class="btn-primary" onclick="window.print()"
+                        style="background: transparent; border: 1px solid var(--glass-border); color: #fff; box-shadow: none;">Cetak
+                        Sertifikat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: ADD ANIMAL DATA (Admin Panel only) -->
+    <div class="modal-overlay" id="modal-add-animal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAddAnimalModal()">&times;</button>
+            <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--color-text);">Input Hewan Kurban Baru</h3>
+            <p class="card-subtitle" style="margin-bottom: 24px;">Lengkapi data berikut untuk mendaftarkan hewan kurban
+                baru ke sistem.</p>
+
+            <form id="form-add-animal" onsubmit="handleAddAnimalSubmit(event)">
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Jenis Hewan</label>
+                            <select id="animal-input-type" class="form-select">
+                                <option value="Sapi">Sapi</option>
+                                <option value="Kambing">Kambing</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nomor ID Hewan</label>
+                            <input type="text" id="animal-input-id" class="form-input"
+                                placeholder="Contoh: SAP-004 / KAM-003" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Berat/Bobot (Kg)</label>
+                            <input type="number" id="animal-input-weight" class="form-input" placeholder="Contoh: 350"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Umur (Tahun)</label>
+                            <input type="number" id="animal-input-age" class="form-input" placeholder="Contoh: 2"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Kondisi Kesehatan</label>
+                        <select id="animal-input-health" class="form-select">
+                            <option value="Sangat Baik & Cukup Umur">Sangat Baik & Cukup Umur</option>
+                            <option value="Sehat Walafiat">Sehat Walafiat</option>
+                            <option value="Dalam Pengawasan Dokter">Dalam Pengawasan Dokter</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary"
+                        style="justify-content: center; width: 100%; padding: 16px;">Simpan Hewan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 6: DAFTAR PENERIMA DAGING -->
+    <div class="modal-overlay" id="modal-recipient">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAddRecipientModal()">&times;</button>
+            <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--color-text);">Pendaftaran Penerima Daging
+                Kurban</h3>
+            <p class="card-subtitle" style="margin-bottom: 24px;">Lengkapi data di bawah ini untuk mendaftarkan warga
+                penerima baru.</p>
+
+            <form id="form-add-recipient" onsubmit="handleAddRecipientSubmit(event)">
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div class="form-group">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input type="text" id="recipient-input-name" class="form-input"
+                            placeholder="Nama Lengkap Penerima" required>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Jumlah Anggota Keluarga</label>
+                            <input type="number" id="recipient-input-familyCount" class="form-input" min="1"
+                                placeholder="Contoh: 4" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pilihan Daging</label>
+                            <select id="recipient-input-meatType" class="form-select">
+                                <option value="Sapi">Daging Sapi</option>
+                                <option value="Kambing">Daging Kambing</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Blok Rumah</label>
+                            <input type="text" id="recipient-input-block" class="form-input"
+                                placeholder="Contoh: Blok A3" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nama Perumahan</label>
+                            <input type="text" id="recipient-input-housing" class="form-input"
+                                placeholder="Contoh: Perumahan Indah" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Warna Cat Rumah</label>
+                            <input type="text" id="recipient-input-color" class="form-input" placeholder="Contoh: Biru"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">No. WhatsApp</label>
+                            <input type="tel" id="recipient-input-phone" class="form-input"
+                                placeholder="Contoh: 08123456789" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary"
+                        style="justify-content: center; width: 100%; padding: 16px;">Daftarkan Penerima</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="modal-login">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <h2 class="form-title" style="margin-bottom: 20px;">Login Admin</h2>
+            <form id="form-login" onsubmit="handleLogin(event)">
+                <div class="form-group" style="text-align: left;">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="Masukkan password admin"
+                        required>
+                </div>
+                <div class="form-grid" style="margin-top: 20px;">
+                    <button type="button" class="btn-primary"
+                        style="background: transparent; border: 1px solid var(--color-border); color: var(--color-text-muted);"
+                        onclick="closeLoginModal()">Batal</button>
+                    <button type="submit" class="btn-primary">Masuk</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 7: DONASI GOPAY -->
+    <div class="modal-overlay" id="modal-donation">
+        <div class="modal-content" style="max-width: 440px; text-align: center;">
+            <button class="modal-close" onclick="closeDonationModal()">&times;</button>
+            <h3 style="font-size: 1.4rem; color: #000; margin-bottom: 6px;">Donasi Gopay</h3>
+            <p class="card-subtitle" style="margin-bottom: 20px;">Dukung pengembangan Kurban Digital dengan donasi melalui Gopay.</p>
+ 
+            <div style="background: #ffffff; padding: 20px; border-radius: 20px; display: inline-block; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 20px; border: 1px solid var(--glass-border);">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&color=00AED6&data=gopay%3A%2F%2Ftransfer%3Fphone%3D087791881535"
+                     alt="Gopay QR"
+                     style="width: 220px; height: 220px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px;">
+            </div>
+
+            <div style="text-align: left; background: #fafafa; padding: 16px; border-radius: 12px; border: 1px solid var(--glass-border); margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="font-size: 0.8rem; color: var(--color-text-muted);">Penerima</span>
+                    <span style="font-size: 0.8rem; font-weight: 700; color: #000;">Risky Hariadi</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.8rem; color: var(--color-text-muted);">Nomor Gopay</span>
+                    <span style="font-size: 0.95rem; font-weight: 800; color: #00AED6; letter-spacing: 0.03em;">0877-9188-1535</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-size: 0.8rem; color: var(--color-text-muted);">Provider</span>
+                    <span style="font-size: 0.8rem; font-weight: 700; color: #00AED6;">Gopay (E-Wallet)</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+                <button class="btn-primary" onclick="copyGopayNumberModal()" style="flex: 1; justify-content: center; background: #00AED6; border: none; color: #fff;">Salin Nomor Gopay</button>
+                <button class="btn-primary" onclick="closeDonationModal()" style="flex: 1; justify-content: center; background: #fff; border: 1px solid #eaeaea; color: var(--color-text-muted); box-shadow: none;">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <footer style="text-align: center; padding: 24px 16px; color: var(--color-text-muted); font-size: 0.85rem; border-top: 1px solid var(--glass-border); margin-top: 40px; margin-bottom: 20px;">
+        <p>© 2026 Kurban Digital. Developed with 💚 by <strong>Risky Hariadi</strong>.</p>
+    </footer>
+
+    <!-- Sticky Bottom Navigation (Mobile Viewports Only) -->
+    <nav class="mobile-nav-bar">
+        <button class="mobile-nav-item active" id="m-nav-home" onclick="switchPage('home')">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+            <span>Home</span>
+        </button>
+        <button class="mobile-nav-item" id="m-nav-takbir" onclick="switchPage('takbir')">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+            </svg>
+            <span>Takbir</span>
+        </button>
+        <button class="mobile-nav-item" id="m-nav-streaming" onclick="switchPage('streaming')">
+            <svg viewBox="0 0 24 24">
+                <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+            </svg>
+            <span>Streaming</span>
+        </button>
+        <button class="mobile-nav-item admin-only" id="m-nav-kurban" onclick="switchPage('shohibul')">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
+            </svg>
+            <span>Shohibul</span>
+        </button>
+        <button class="mobile-nav-item admin-only" id="m-nav-distribusi" onclick="switchPage('distribusi')">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
+            </svg>
+            <span>Distribusi</span>
+        </button>
+        <button class="mobile-nav-item admin-only" id="m-nav-pembayaran" onclick="switchPage('pembayaran')">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.25z" />
+            </svg>
+            <span>Bayar</span>
+        </button>
+    </nav>
+
+    <!-- Scanning line animation styles -->
+    <style>
+        @keyframes scanLaser {
+            0% {
+                top: 10%;
+            }
+
+            50% {
+                top: 90%;
+            }
+
+            100% {
+                top: 10%;
+            }
+        }
+
+        /* ===== FLOATING WHATSAPP BUTTON ===== */
+        .wa-float-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 14px 20px;
+            border-radius: 50px;
+            box-shadow: 0 6px 28px rgba(37, 211, 102, 0.45);
+            text-decoration: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, padding 0.3s ease;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .wa-float-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 10px 36px rgba(37, 211, 102, 0.6);
+            color: #fff;
+        }
+
+        .wa-float-btn svg {
+            flex-shrink: 0;
+            width: 26px;
+            height: 26px;
+            fill: #fff;
+        }
+
+        .wa-float-label {
+            max-width: 120px;
+            overflow: hidden;
+            transition: max-width 0.35s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+
+        /* Pulse ring animation */
+        .wa-pulse-ring {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9998;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: rgba(37, 211, 102, 0.35);
+            animation: waPulse 2s ease-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes waPulse {
+            0% {
+                transform: scale(0.85);
+                opacity: 0.8;
+            }
+
+            70% {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile: only show icon */
+        @media (max-width: 640px) {
+            .wa-float-btn {
+                bottom: 80px;
+                right: 16px;
+                padding: 14px;
+                border-radius: 50%;
+            }
+
+            .wa-float-label {
+                display: none;
+            }
+
+            .wa-pulse-ring {
+                bottom: 80px;
+                right: 16px;
+            }
+        }
+    </style>
+
+    <!-- ===== FLOATING WHATSAPP BUTTON ===== -->
+    <!-- Ganti nomor WA di bawah ini (format: 62xxx tanpa + atau 0) -->
+    <div class="wa-pulse-ring"></div>
+    <a id="wa-float" class="wa-float-btn"
+        href="https://wa.me/6287791881535?text=Assalamualaikum%2C%20saya%20ingin%20bertanya%20tentang%20Kurban%20Digital...%20"
+        target="_blank" rel="noopener noreferrer" title="Chat WhatsApp Panitia">
+        <!-- WhatsApp Official SVG Icon -->
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M16.002 2.667C8.638 2.667 2.667 8.638 2.667 16c0 2.354.636 4.559 1.74 6.458L2.667 29.333l7.104-1.713A13.28 13.28 0 0 0 16.002 29.333C23.365 29.333 29.333 23.362 29.333 16S23.365 2.667 16.002 2.667zm0 2.4c5.927 0 10.933 5.006 10.933 10.933S21.929 26.933 16.002 26.933a10.9 10.9 0 0 1-5.668-1.577l-.406-.248-4.217 1.017 1.05-4.076-.272-.427A10.897 10.897 0 0 1 5.069 16c0-5.927 5.006-10.933 10.933-10.933zm-3.2 5.2c-.267 0-.694.1-.965.4-.27.3-1.069 1.044-1.069 2.546 0 1.503 1.095 2.955 1.247 3.16.153.203 2.107 3.35 5.19 4.568 2.563 1.012 3.085.81 3.642.76.557-.051 1.798-.735 2.052-1.445.254-.71.254-1.318.178-1.445-.076-.127-.28-.203-.584-.355-.305-.152-1.798-.887-2.077-.987-.279-.102-.483-.153-.686.152-.203.305-.787.987-.964 1.19-.178.203-.355.228-.66.076-.305-.152-1.285-.474-2.448-1.51-.904-.806-1.515-1.8-1.692-2.105-.178-.305-.019-.47.133-.62.137-.136.305-.355.457-.533.152-.178.203-.305.305-.508.102-.203.051-.381-.025-.533-.076-.152-.672-1.66-.931-2.27-.243-.583-.493-.497-.672-.505l-.572-.01z" />
+        </svg>
+        <span class="wa-float-label">Chat Panitia</span>
+    </a>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+node_modules
+.env
+.env.local
+.env*.local
+npm-debug.log*
+.DS_Store
+temp_test
+output.txt
+qr_base64.txt
+*.log
+
+# Source asli — JANGAN masuk ke image builder context yang tidak perlu
+# src/ tetap masuk ke builder stage (perlu untuk build.js)
+# tapi TIDAK akan di-COPY ke runner stage
+
+# File dokumentasi & dev
+Dokumentasi/
+README.md
+.git/
+.gitignore
+.vercel/
+vercel.json
+
+# File temporary build
+public/
+
+# Gas Apps Script (tidak relevan di Docker)
+gas_backend.gs
+
+# Poster & promo (tidak diperlukan di server)
+poster.html
+promo_poster.png
+sharing_eid_adha.png
+
+# API folder (sudah dihandle server.js)
+# api/

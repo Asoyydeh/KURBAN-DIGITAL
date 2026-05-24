@@ -1,0 +1,62 @@
+================================================================================
+           PANDUAN INTEGRASI GOOGLE APPS SCRIPT (GAS) - KURBAN DIGITAL
+================================================================================
+
+Aplikasi Kurban Digital ini menggunakan Google Apps Script (GAS) dan Google Sheets 
+sebagai backend/database untuk menyimpan data donatur dan shohibul kurban.
+
+Berikut adalah panduan untuk menghubungkan aplikasi Anda ke Google Apps Script 
+milik Anda sendiri:
+
+--------------------------------------------------------------------------------
+LANGKAH 1: SETUP GOOGLE SHEETS & GOOGLE APPS SCRIPT
+--------------------------------------------------------------------------------
+1. Buka Google Sheets dan buat spreadsheet baru (misal: "Database Kurban").
+2. Klik menu "Extensions" (Ekstensi) > "Apps Script".
+3. Salin seluruh isi file kode dari file `gas_backend.gs` yang ada di dalam 
+   folder project ini.
+4. Paste kode tersebut ke editor Apps Script yang baru terbuka (timpa kode bawaannya).
+5. Klik "Deploy" (Terapkan) > "New Deployment" (Penerapan Baru).
+6. Pilih tipe: "Web app" (Aplikasi Web).
+7. Atur akses ("Who has access") menjadi: "Anyone" (Siapa saja).
+8. Klik "Deploy" dan izinkan akses (Authorize access) ke akun Google Anda.
+9. Anda akan mendapatkan sebuah "Web app URL" (URL Aplikasi Web) yang panjang.
+   Copy URL tersebut!
+
+--------------------------------------------------------------------------------
+LANGKAH 2: MENGHUBUNGKAN URL KE APLIKASI
+--------------------------------------------------------------------------------
+Sekarang kita perlu memasukkan URL tersebut ke dalam source code aplikasi.
+
+📍 LOKASI FILE:
+Buka file berikut di dalam project Anda:
+`src/app.js`
+
+🔍 BARIS KODE:
+Cari variabel bernama `GAS_URL` yang berada di sekitar Baris ke-95.
+Kodenya akan terlihat seperti ini:
+
+   const GAS_URL = "https://script.google.com/macros/s/AKfycbyNP.../exec";
+
+✏️ CARA MENGUBAH:
+1. Hapus URL lama yang berada di dalam tanda kutip ("...").
+2. Paste "Web app URL" milik Anda yang tadi didapatkan dari Langkah 1.
+3. Simpan (Save) file `src/app.js`.
+
+--------------------------------------------------------------------------------
+LANGKAH 3: BUILD DAN DEPLOY ULANG
+--------------------------------------------------------------------------------
+Karena kode berada di dalam folder `src/`, Anda WAJIB melakukan build ulang agar
+kode yang dienkripsi (obfuscated) ikut terupdate.
+
+Jika Anda menggunakan Vercel (Online):
+- Cukup commit perubahan ini dan push ke GitHub Anda, Vercel akan otomatis 
+  mem-build ulang aplikasinya.
+
+Jika Anda menggunakan Docker (Server/VPS Lokal):
+- Buka terminal dan jalankan ulang perintah:
+  npm run docker:deploy
+
+================================================================================
+SELESAI! Database aplikasi sekarang sudah terhubung dengan Google Sheets Anda.
+================================================================================
